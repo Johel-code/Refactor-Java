@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=Rental
+comment1.params=movie\ daysRented
+comment1.target=Rental(Movie,\ int)
+comment2.params=
+comment2.target=int\ getDaysRented()
+comment3.params=
+comment3.target=Movie\ getMovie()
+numComments=4

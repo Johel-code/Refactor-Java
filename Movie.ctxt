@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=Movie
+comment1.params=title\ priceCode
+comment1.target=Movie(java.lang.String,\ int)
+comment2.params=
+comment2.target=int\ getPriceCode()
+comment3.params=arg
+comment3.target=void\ setPriceCode(int)
+comment4.params=
+comment4.target=java.lang.String\ getTitle()
+numComments=5
