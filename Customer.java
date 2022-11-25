@@ -22,26 +22,11 @@ public class Customer
         Enumeration rentals = _rentals.elements();
         String result = "Rental Record for " + getName() + "\n";
         while(rentals.hasMoreElements()){
-            double thisAmount = 0;
+            double thisAmount = 0; 
             Rental each = (Rental) rentals.nextElement();
-            
-            //detemine amounts for each line
-            switch (each.getMovie().getPriceCode()){
-                case Movie.REGULAR:
-                    thisAmount += 2;
-                    if (each.getDaysRented() > 2)
-                        thisAmount += (each.getDaysRented() - 2) * 1.5;
-                    break;
-                case Movie.NEW_RELEASE:
-                    thisAmount += each.getDaysRented() * 3;
-                    break;
-                case Movie.CHILDRENS:
-                    thisAmount += 1.5;
-                    if (each.getDaysRented() > 3)
-                        thisAmount += (each.getDaysRented() - 3) * 1.5;
-                    break;
-            }
-            
+
+            thisAmount = amountFor(each);
+
             //add frequent renter points
             frequentRenterPoints ++;
             
@@ -59,5 +44,49 @@ public class Customer
         result += "You earned " + String.valueOf(frequentRenterPoints) + " frequent renter points";
         
         return result;
+    }
+
+    private double amountFor(Rental aRental){
+        double result = 0;
+        
+        switch (aRental.getMovie().getPriceCode()){
+            case Movie.REGULAR:
+                result += 2;
+                if (aRental.getDaysRented() > 2)
+                    result += (aRental.getDaysRented() - 2) * 1.5;
+                break;
+            case Movie.NEW_RELEASE:
+                result += aRental.getDaysRented() * 3;
+                break;
+            case Movie.CHILDRENS:
+                result += 1.5;
+                if (aRental.getDaysRented() > 3)
+                    result += (aRental.getDaysRented() - 3) * 1.5;
+                break;
+        }
+        return result;
+    }
+
+    public static void main(String[] arg){
+        Customer customer = new Customer("Johel");
+        Movie movie0 = new Movie("Monty", 1);
+        Movie movie01 = new Movie("Ran", 2);
+        Movie movie1 = new Movie("Star Wars", 2);
+        Movie movie2 = new Movie("Star Trek", 2);
+        Movie movie3 = new Movie("Wallace and Gromit", 1);
+        Rental rental = new Rental(movie1, 6);
+        Rental rental1 = new Rental(movie0, 1);
+        Rental rental2 = new Rental(movie01, 2);
+        Rental rental3 = new Rental(movie2, 6);
+        Rental rental4 = new Rental(movie3, 6);
+        
+        customer.addRental(rental);
+        customer.addRental(rental1);
+        customer.addRental(rental2);
+        customer.addRental(rental3);
+        customer.addRental(rental4);
+
+        String res = customer.statement();
+        System.out.println(res);
     }
 }
